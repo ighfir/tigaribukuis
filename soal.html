@@ -1,0 +1,169 @@
+<html>
+<head>
+
+<title>Kuis Pilihan Ganda Teknik Jaringan Komputer</title>
+<script type="text/javascript" src="js/external/mootools-core-1.4.5-minified.js"></script>
+<script type="text/javascript" src="js/dg-count-down.js"></script>
+<script type="text/javascript" src="js/quiz.js"></script>
+<style type="text/css">
+
+body {
+	
+	font-family:ArimoRegular;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #0000;
+	margin-top: 10px;
+	margin-left: 30px;
+	margin-right: 15px;
+	line-height: 1cm;
+}
+
+.dg-question-label{ /* Question label */
+	font-weight:bold;
+}
+
+img{
+	border:0px;
+}
+#error {
+	font-style:bold;
+	color:red;
+	font-size:15px
+}
+
+</style>
+</head>
+<body>
+
+
+<div id="questions"></div>
+<div id="error"></div>
+<div id="result"></div>
+<script type="text/javascript">
+
+function showWrongAnswer(){
+    document.id('error').set('html', 'jawaban salah, coba lagi');
+}
+
+function showScore() {
+	
+	var score = quiz.getScore();
+	var el = new Element('h4');
+    document.id('result').adopt(el);
+
+	el = new Element('h2');
+	el.set('html', 'The Correct Answer is : ' + score.numCorrectAnswers + ' of ' + score.numQuestions);
+    document.id('result').adopt(el);
+
+	if(score.incorrectAnswers.length > 0) {
+		el = new Element('h3');
+		el.set('html', 'You can check the correct answer below!');
+		document.id('result').adopt(el);
+
+		for(var i=0;i<score.incorrectAnswers.length;i++) {
+			var incorrectAnswer = score.incorrectAnswers[i];
+			el = new Element('div');
+			el.set('html', '<b>' + incorrectAnswer.label + '</b>');
+			document.id('result').adopt(el);
+
+			el = new Element('div');
+			el.set('html', 'Your Answer : ' + incorrectAnswer.userAnswer);
+            document.id('result').adopt(el);
+			el = new Element('div');
+			el.set('html', 'The Correct Answer : ' + incorrectAnswer.correctAnswer);
+            document.id('result').adopt(el);
+			
+
+		}
+	}
+
+}
+
+var questions = [
+	
+{
+	
+		label : ' 1. Beberapa komputer yang dapat saling berhubungan dan melakukan komunikasi satu sama lain dengan menggunakan perangkat jaringan seperti Ethernet card, bridge, modem dan lain-lain disebut dengan ... ',
+		options : ['Workstation', 'Jaringan komputer', 'Client', 'Sharing',' Group Computer'],
+		answer : ['Jaringan komputer'],
+		forceAnswer : true
+  },
+	{
+		label : '2. Penulisan IP addres 11000000.10101000.00000010.00001000 dalam bentuk decimal ditulis sebagai berikut ...',
+		options : ['192.162.1.8', '192.162.2.8', '192.168.2.16', '191.168.2.8', '191.168.1.8'],
+		answer : ['192.162.2.8']
+			
+    },
+	{
+		label : '3. Penulisan IP address 10.208.16.240 dalam bentuk binary ditulis sebagai berikut ...',
+		options : ['00001010.11010000.00010000.11111000', '00001010.11010000.00001111.11100000', '00001010.11010000.00010000.11110000', '00001010.11010000.00001111.11010000', '00001010.11010000.00011111.10110000'],
+		answer : ['00001010.11010000.00010000.11110000']
+		
+    },
+	{
+		label : '4. Setiap computer yang terhubung ke jaringan dapat bertindak baik sebagai workstation maupun server disebut dengan jaringan ...',
+		options : ['client and server', 'local area network', 'bus', 'tree', 'peer to peer'],
+		answer : ['peer to peer']
+    },
+	{
+		label : '5. LAN singkatan dari ...',
+		options : ['Local area networking', 'Local array network', 'Local array networking', 'Local automatic netwoking', 'Local area network'],
+		answer : ['Local area network']
+    },
+    {
+		label : '6. Perintah “PING” pada jaringan digunakan untuk hal – hal berikut ini,kecuali ...',
+		options : ['menguji fungsi kirim sebuah NIC', 'menguji fungsi terima sebuah NIC', 'menguji kesesuaian sebuah TCP/IP', 'menguji konfirmasi TCP/IP', 'menguji koneksi jaringan' ],
+		answer : ['menguji koneksi jaringan']
+    },
+     {
+		label : '7. Suatu pengelola seluruh sumber-daya yang terdapat pada system computer dan menyediakan sekumpulan layanan ke pemakai sehingga memudahkan dalam pengguna dan pemanfaat sumber daya system computer disebut juga ...',
+		options : ['Sistem operasional', 'Sistem manajemen', 'Sistem pengaturan', 'Sistem Komputer', 'Sistem Operasi' ],
+		answer : ['Sistem Operasi']
+    },
+{
+		label : '8. Jaringan WAN mencakup hubungan antar ...',
+		options : ['gedung','ruangan','benua/negara' , 'propinsi', 'kabupaten'],
+		answer : ['benua/negara']
+    },
+{
+		label : '9. Untuk mengetahui IP address sebuah PC yang tersambung ke jaringan menggunakan perintah ...',
+		options : ['ipconfig' , 'ping','cmd','chkdsk', 'command'],
+		answer : ['ipconfig']
+    },
+{
+		label : '10. Jika hasil dari perintah ping pada layer adalah request time out berarti ...',
+		options : ['Koneksi jaringan baik', 'Koneksi jaringan belum jalan', 'Koneksi jaringan lambat' ,'Perintah ping tidak jalan', 'Setting IP Address sudah benar'],
+		answer : ['Koneksi jaringan belum jalan']
+    },	
+
+]
+
+function showAnswerAlert() {
+	document.id('error').set('html', 'Oopss.. Kamu belum memilih jawaban');
+}
+function clearErrorBox() {
+    document.id('error').set('html','');
+}
+var quiz = new DG.Quiz({
+	questions : questions,
+	el : 'questions',
+    forceCorrectAnswer:false,
+
+	listeners : {
+		'finish' : showScore,
+		'missinganswer' : showAnswerAlert,
+		'sendanswer' : clearErrorBox,
+        'wrongAnswer' : showWrongAnswer
+	}
+});
+quiz.start();
+
+
+
+</script>
+
+</body>
+</html>
